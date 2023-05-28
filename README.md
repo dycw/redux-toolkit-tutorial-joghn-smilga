@@ -1,6 +1,6 @@
-# `template-react`
+# Redux Toolkit Tutorial (John Smilga)
 
-Template for React repositories
+https://www.youtube.com/watch?v=bbkBuqC1rU4
 
 ## Getting started
 

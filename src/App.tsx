@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "./app/hooks";
+import CartContainer from "./components/CartContainer";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <CartContainer />
     </>
   );
 }

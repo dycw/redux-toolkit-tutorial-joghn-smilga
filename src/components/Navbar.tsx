@@ -1,8 +1,10 @@
 import { useAppSelector } from "../app/hooks.ts";
 import { CartIcon } from "../icons.tsx";
+import { selectTotalQuantity } from "../slices/cart.tsx";
 
 const Navbar = () => {
-  const amount = useAppSelector((store) => store.cart.amount);
+  const quantity = useAppSelector((s) => selectTotalQuantity(s.cart));
+
   return (
     <>
       <nav>
@@ -11,7 +13,7 @@ const Navbar = () => {
           <div className="nav-container">
             <CartIcon />
             <div className="amount-container">
-              <p className="total-amount">{amount}</p>
+              <p className="total-amount">{quantity}</p>
             </div>
           </div>
         </div>

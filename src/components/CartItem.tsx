@@ -1,17 +1,18 @@
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { ChevronUp, ChevronDown } from "../icons";
-import { removeItem, increase, decrease } from "../slices/cart";
+import { removeItem, increase, decrease, selectQuantity } from "../slices/cart";
 
 type Props = {
-  id: string;
-  img: string;
+  id: number;
   title: string;
   price: number;
-  amount: number;
+  img: string;
 };
 
 export default function CartItem(props: Props) {
   const dispatch = useAppDispatch();
+  const amount = useAppSelector((s) => selectQuantity(s.cart, props.id));
+
   return (
     <article className="cart-item">
       <img src={props.img} alt={props.title} />
@@ -20,9 +21,7 @@ export default function CartItem(props: Props) {
         <h4 className="item-price">${props.price}</h4>
         <button
           className="remove-btn"
-          onClick={() => {
-            dispatch(removeItem(props.id));
-          }}
+          onClick={() => dispatch(removeItem(props.id))}
         >
           remove
         </button>
@@ -36,13 +35,10 @@ export default function CartItem(props: Props) {
         >
           <ChevronUp />
         </button>
-        <p className="amount">{props.amount}</p>
+        <p className="amount">{amount}</p>
         <button
           className="amount-btn"
-          onClick={() => {
-            props.amount === 1 && dispatch(removeItem(props.id));
-            props.amount >= 2 && dispatch(decrease(props.id));
-          }}
+          onClick={() => dispatch(decrease(props.id))}
         >
           <ChevronDown />
         </button>

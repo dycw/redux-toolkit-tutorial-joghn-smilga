@@ -1,32 +1,34 @@
+import { useGetCartItemsQuery } from "../api/api";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { selectTotalPrice } from "../slices/cart";
 import { openModal } from "../slices/modal";
 import CartItem from "./CartItem";
 
 export default function CartContainer() {
   const dispatch = useAppDispatch();
-  const { cartItems, total, amount } = useAppSelector((store) => store.cart);
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetCartItemsQuery(null);
+  const content = isLoading ? (
+    <div>Loading...</div>
+  ) : isSuccess && data ? (
+    data.map((item) => (
+      <CartItem
+        key={item.id}
+        id={item.id}
+        title={item.title}
+        price={item.price}
+        img={item.img}
+      />
+    ))
+  ) : isError && error ? (
+    <div>{error.toString()}</div>
+  ) : null;
 
-  if (amount < 1) {
-    return (
-      <section className="cart">
-        <header>
-          <h2>your bag</h2>
-          <h4 className="empty-cart">is currently empty</h4>
-        </header>
-      </section>
-    );
-  }
-
+  const total = useAppSelector((s) => selectTotalPrice(s.cart));
   return (
     <section className="cart">
-      <header>
-        <h2>your bag</h2>
-      </header>
-      <div>
-        {cartItems.map((item) => {
-          return <CartItem key={item.id} {...item} />;
-        })}
-      </div>
+      <h2>Your shopping cart</h2>
+      {content}
       <footer>
         <hr />
         <div className="cart-total">

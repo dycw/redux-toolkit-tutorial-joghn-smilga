@@ -1,6 +1,5 @@
-// import { openModal } from "../features/modal/modalSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { clearCart } from "../slices/cart";
+import { openModal } from "../slices/modal";
 import CartItem from "./CartItem";
 
 export default function CartContainer() {
@@ -35,8 +34,7 @@ export default function CartContainer() {
             total <span>${total.toFixed(2)}</span>
           </h4>
         </div>
-        <button className="btn clear-btn" onClick={() => dispatch(clearCart())}>
-          {/* <button className='btn clear-btn' onClick={() => dispatch(openModal())}> */}
+        <button className="btn clear-btn" onClick={() => dispatch(openModal())}>
           clear cart
         </button>
       </footer>

@@ -11,7 +11,7 @@ export const api = createApi({
     getCartItems: builder.query<Item[], null>({
       query: () => "/",
       transformResponse: (resp: Products) =>
-        resp.products.map((p) => ({
+        resp.products.slice(0, 8).map((p) => ({
           id: p.id,
           title: p.title,
           price: p.price,

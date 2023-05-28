@@ -10,7 +10,9 @@ export const cartSlice = createSlice({
   initialState: state,
   reducers: {
     clearCart: (state) => {
-      state.items = [];
+      state.items.map((item) => {
+        item.quantity = 0;
+      });
     },
     removeItem: (state, action: PayloadAction<number>) => {
       const item = state.items.find((item) => item.id === action.payload);

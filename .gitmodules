@@ -1,0 +1,3 @@
+[submodule "redux-toolkit-tutorial"]
+	path = redux-toolkit-tutorial
+	url = https://github.com/john-smilga/redux-toolkit-tutorial
